@@ -33,7 +33,8 @@ class Counter extends Component {
             {this.props.storedResults.map((strResult) => (
               <li
                 key={strResult.id}
-                onClick={this.props.onDeleteCounter.bind(this, strResult.id)}
+                // onClick={this.props.onDeleteCounter.bind(this, strResult.id)}
+                onClick={() => this.props.onDeleteCounter(strResult.id)}
               >
                 {strResult.value}
               </li>
