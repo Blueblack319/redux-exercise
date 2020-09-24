@@ -33,10 +33,18 @@ export const substract = (value) => {
   };
 };
 
-export const storeResult = (result) => {
+const storeResult = (result) => {
   return {
     type: actionTypes.STORE_RESULT,
     result,
+  };
+};
+
+export const storeResultAsync = (result) => {
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(storeResult(result));
+    }, 2000);
   };
 };
 
