@@ -1,4 +1,5 @@
 import actionTypes from "../actions/actionTypes";
+import { updatedObject } from "./utility";
 
 const initialState = {
   results: [],
@@ -7,24 +8,20 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   // eslint-disable-next-line
   switch (action.type) {
-    case actionTypes.STORE_RESULT:
-      return {
-        ...state,
-        results: state.results.concat({
-          id: new Date(),
-          value: action.result,
-        }),
-      };
-    case actionTypes.DELETE_RESULT:
-      // const updatedResults = [...state.results];
-      // updatedResults.splice(action.resultEleId, 1)
+    case actionTypes.STORE_RESULT: {
+      const updatedResults = state.results.concat({
+        id: new Date(),
+        value: action.result,
+      });
+      return updatedObject(state, { results: updatedResults });
+    }
+
+    case actionTypes.DELETE_RESULT: {
       const updatedResults = state.results.filter(
         (result) => result.id !== action.resultEleId
       );
-      return {
-        ...state,
-        results: updatedResults,
-      };
+      return updatedObject(state, { results: updatedResults });
+    }
   }
 
   return state;
